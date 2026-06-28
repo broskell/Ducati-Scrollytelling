@@ -1,5 +1,5 @@
 // Mouse Interaction: Subtle Camera Drift and Studio Spotlight Sweeps
-import { CONFIG } from './config.js';
+import { MOTION } from './config/motion.js';
 
 class MouseInteraction {
   constructor() {
@@ -44,8 +44,8 @@ class MouseInteraction {
     this.mouseY = (e.clientY / h) - 0.5;
 
     // Set target positions
-    this.targetDriftX = this.mouseX * CONFIG.animation.mouseDriftX * 2; // e.g. -3.5px to 3.5px
-    this.targetDriftY = this.mouseY * CONFIG.animation.mouseDriftY * 2; // e.g. -2px to 2px
+    this.targetDriftX = this.mouseX * MOTION.mouseDriftX * 2; // e.g. -3.5px to 3.5px
+    this.targetDriftY = this.mouseY * MOTION.mouseDriftY * 2; // e.g. -2px to 2px
 
     // Spotlight sweeps within 35% - 65% of screen
     this.targetLightX = 50 + (this.mouseX * 30);

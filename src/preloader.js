@@ -1,11 +1,10 @@
-// Image preloading and caching system
-import { CONFIG } from './config.js';
+import { TIMELINE } from './config/timeline.js';
 
 class ImagePreloader {
   constructor() {
     this.images = [];
     this.loadedCount = 0;
-    this.totalCount = CONFIG.frames.total;
+    this.totalCount = TIMELINE.frames.total;
     this.onFrame1Loaded = null;
     this.onAllLoaded = null;
     this.onProgress = null;
@@ -55,7 +54,7 @@ class ImagePreloader {
   // Format frame index to zero-padded naming convention (e.g. 001 to 051)
   getFramePath(index) {
     const pad = String(index).padStart(3, '0');
-    return `${CONFIG.frames.basePath}${pad}${CONFIG.frames.extension}`;
+    return `${TIMELINE.frames.basePath}${pad}${TIMELINE.frames.extension}`;
   }
 
   // Background-load all other images and decode them

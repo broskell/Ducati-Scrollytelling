@@ -1,5 +1,5 @@
 // Callouts and SVG Connector Lines Subsystem
-import { CONFIG } from './config.js';
+import { CALLOUTS } from './config/callouts.js';
 
 class CalloutSystem {
   constructor() {
@@ -15,23 +15,20 @@ class CalloutSystem {
     this.svgOverlay = document.getElementById(svgId);
     this.canvas = document.getElementById(canvasId);
 
-    // Cache elements and set absolute percentage coordinates for hotspots
-    CONFIG.callouts.forEach(cfg => {
+    // Cache elements and set absolute coordinates
+    CALLOUTS.forEach(cfg => {
       const card = document.getElementById(cfg.id);
       if (!card) return;
 
-      // Position the hotspot dot using CSS percentage offsets
       const dot = card.querySelector('.callout-dot');
       if (dot) {
         dot.style.left = `${cfg.hotspot.x}%`;
         dot.style.top = `${cfg.hotspot.y}%`;
       }
 
-      // Position the glass panel relative to the hotspot
       const panel = card.querySelector('.glass-panel');
       if (panel) {
         panel.style.position = 'absolute';
-        // Place using offsets
         panel.style.left = `calc(${cfg.hotspot.x}% + ${cfg.cardOffset.x}px)`;
         panel.style.top = `calc(${cfg.hotspot.y}% + ${cfg.cardOffset.y}px)`;
       }
@@ -44,7 +41,6 @@ class CalloutSystem {
       this.calloutElements[cfg.id] = { card, dot, panel, path, config: cfg };
     });
 
-    // Update lines initially and register for resize events
     this.updateLines();
     window.addEventListener('resize', () => this.updateLines());
   }
@@ -56,14 +52,14 @@ class CalloutSystem {
     const overlayRect = this.svgOverlay.getBoundingClientRect();
     if (overlayRect.width === 0 || overlayRect.height === 0) return;
 
-    CONFIG.callouts.forEach(cfg => {
+    CALLOUTS.forEach(cfg => {
       const els = this.calloutElements[cfg.id];
       if (!els || !els.dot || !els.panel || !els.path) return;
 
       const dotRect = els.dot.getBoundingClientRect();
       const panelRect = els.panel.getBoundingClientRect();
 
-      // Get center coords of the dot relative to the SVG container space
+      // Get center coordinates of the dot relative to the SVG overlay container
       const dx = dotRect.left - overlayRect.left + dotRect.width / 2;
       const dy = dotRect.top - overlayRect.top + dotRect.height / 2;
 
@@ -77,20 +73,17 @@ class CalloutSystem {
       let targetX, targetY;
 
       if (dx < px) {
-        // Dot is to the left of the card
         targetX = px;
         targetY = py + ph / 2;
       } else if (dx > px + pw) {
-        // Dot is to the right of the card
         targetX = px + pw;
         targetY = py + ph / 2;
       } else {
-        // Dot is vertically aligned, choose top or bottom edge
         targetX = px + pw / 2;
         targetY = (dy < py) ? py : (py + ph);
       }
 
-      // Convert layout absolute coordinates into SVG viewbox coordinates (0..1280, 0..720)
+      // Convert layout absolute coordinates into SVG viewbox coordinates (1280x720)
       const scaleX = 1280 / overlayRect.width;
       const scaleY = 720 / overlayRect.height;
 
@@ -99,17 +92,13 @@ class CalloutSystem {
       const svgTx = targetX * scaleX;
       const svgTy = targetY * scaleY;
 
-      // Draw path (Direct segment or subtle Apple-style angled elbow line)
-      // An elbow path looks much cleaner and premium:
-      // We go from dot, bend horizontally/vertically, then hit the card edge.
+      // Draw angled elbow path (Apple-style visual connector)
       let dPath;
-      const midX = svgDx + (svgTx - svgDx) * 0.3; // bend after 30% of distance
+      const midX = svgDx + (svgTx - svgDx) * 0.3; // bend at 30% width
       
       if (Math.abs(svgDx - svgTx) > 40) {
-        // Angled elbow path
         dPath = `M ${svgDx} ${svgDy} L ${midX} ${svgDy} L ${svgTx} ${svgTy}`;
       } else {
-        // Direct linear path if aligned closely
         dPath = `M ${svgDx} ${svgDy} L ${svgTx} ${svgTy}`;
       }
 
@@ -121,17 +110,14 @@ class CalloutSystem {
   update(frameIndex) {
     let nextActiveId = null;
 
-    // Determine which callout is active based on frame index
-    // Keep only one callout active at any given frame for clean focus
-    for (const cfg of CONFIG.callouts) {
-      if (frameIndex >= cfg.frameStart && frameIndex < cfg.frameEnd) {
+    for (const cfg of CALLOUTS) {
+      if (frameIndex >= cfg.startFrame && frameIndex < cfg.endFrame) {
         nextActiveId = cfg.id;
         break;
       }
     }
 
     if (nextActiveId !== this.activeCalloutId) {
-      // Deactivate old callout
       if (this.activeCalloutId) {
         const els = this.calloutElements[this.activeCalloutId];
         if (els) {
@@ -140,14 +126,11 @@ class CalloutSystem {
         }
       }
 
-      // Activate new callout
       this.activeCalloutId = nextActiveId;
       if (this.activeCalloutId) {
         const els = this.calloutElements[this.activeCalloutId];
         if (els) {
-          // Re-calculate lines to ensure pixel accuracy on show
           this.updateLines();
-          
           els.card.classList.add('active');
           els.path.classList.add('active');
         }
