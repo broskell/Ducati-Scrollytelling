@@ -40,308 +40,33 @@
         <canvas id="scrolly-canvas"></canvas>
       </div>
 
-      <!-- SVG Connector Overlay (Pointer lines to callouts) -->
-      <svg class="svg-overlay" id="svg-overlay" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet"></svg>
-
-      <!-- Glassmorphic Component Callout Panel Cards -->
-      <div class="callouts-container" id="callouts-container">
-        
-        <!-- Carbon Fiber Fairing Card -->
-        <div class="callout-card" id="callout-fairing" data-hotspot-x="45" data-hotspot-y="40">
-          <div class="callout-dot"></div>
-          <div class="glass-panel">
-            <h3 class="callout-title">Composite Shell</h3>
-            <p class="callout-description">40% mass reduction. Integrated winglets generate 37 kg of aerodynamic downforce at 300 km/h.</p>
-          </div>
-        </div>
-
-        <!-- Titanium Exhaust Card -->
-        <div class="callout-card" id="callout-exhaust" data-hotspot-x="68" data-hotspot-y="62">
-          <div class="callout-dot"></div>
-          <div class="glass-panel">
-            <h3 class="callout-title">Titanium Core</h3>
-            <p class="callout-description">Saves 3.4 kg. Built with racing alloys that tolerate exhaust gas temperatures exceeding 1000°C.</p>
-          </div>
-        </div>
-
-        <!-- Desmosedici Engine Card -->
-        <div class="callout-card" id="callout-engine" data-hotspot-x="52" data-hotspot-y="54">
-          <div class="callout-dot"></div>
-          <div class="glass-panel">
-            <h3 class="callout-title">Desmodromic V4</h3>
-            <p class="callout-description">MotoGP V4 configuration. Mechanical valves eliminate spring float, allowing safe operation past 13,000 RPM.</p>
-          </div>
-        </div>
-
-        <!-- Öhlins Suspension Card -->
-        <div class="callout-card" id="callout-suspension" data-hotspot-x="26" data-hotspot-y="48">
-          <div class="callout-dot"></div>
-          <div class="glass-panel">
-            <h3 class="callout-title">Electronic Forks</h3>
-            <p class="callout-description">Smart EC 2.0 system. Dynamic damping shifts oil flow in microseconds relative to corner loads.</p>
-          </div>
-        </div>
-
-        <!-- Brembo Brakes Card -->
-        <div class="callout-card" id="callout-brakes" data-hotspot-x="18" data-hotspot-y="65">
-          <div class="callout-dot"></div>
-          <div class="glass-panel">
-            <h3 class="callout-title">Stylema R Calipers</h3>
-            <p class="callout-description">Racing piston ventilation paired with high-ventilation steel rotors to counter brake fade.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Narrative Overlay Layer (The 15 Scenes) -->
+      <!-- Narrative Overlay Layer (States 1 and 3) -->
       <div class="story-overlay-container">
         
-        <!-- Scene 1: Who is Ducati? -->
+        <!-- Scene 1: Opening Hero Title -->
         <div class="story-scene active" id="story-scene-1">
           <div class="editorial-layout centered">
             <h1 class="premium-header animate-header">DESMOSEDICI</h1>
-            <p class="premium-sub">Pure performance. Born on track.</p>
-            <p class="scene-narrative">Ducati is not a manufacturer of transport. We are a collection of engineers, racers, and designers bound by a singular obsession: to build the most precise speed machines on earth. Every lap informs our heritage.</p>
+            <p class="premium-sub">Engineering in Motion.</p>
           </div>
         </div>
 
-        <!-- Scene 2: Why do lines exist? -->
-        <div class="story-scene" id="story-scene-2">
-          <div class="editorial-layout centered">
-            <h2 class="editorial-title">THE PHILOSOPHY OF FLOW</h2>
-            <p class="scene-narrative italic">"Every surface directs airflow. Every gram removed improves acceleration. Every chassis line serves purpose. Nothing is added for appearance."</p>
-          </div>
-        </div>
-
-        <!-- Scene 3: Why dismantle? -->
-        <div class="story-scene" id="story-scene-3">
-          <div class="editorial-layout centered">
-            <h2 class="editorial-title">ENGINEERING HONESTY</h2>
-            <p class="scene-narrative">In an exploded view, there is no place to hide. Engineering deserves to be seen. As the components separate, the true anatomy of the V4 superbike is revealed to the eye.</p>
-          </div>
-        </div>
-
-        <!-- Scene 4: Carbon Fiber -->
-        <div class="story-scene" id="story-scene-4">
-          <div class="editorial-layout left-aligned">
-            <h2 class="scene-accent">01. BODYWORK</h2>
-            <h2 class="editorial-title">THE MASS CONSTRAINT</h2>
-            <p class="scene-narrative">How do you reduce weight without sacrificing structural strength? Conventional plastics fail under the aerodynamic loads of high-speed tracks. The solution is Carbon Fiber: high-tensile composite weaves that shave 40% of bodywork mass, born from MotoGP racing designs.</p>
-          </div>
-        </div>
-
-        <!-- Scene 5: Titanium -->
-        <div class="story-scene" id="story-scene-5">
-          <div class="editorial-layout right-aligned">
-            <h2 class="scene-accent">02. CHASSIS CORE</h2>
-            <h2 class="editorial-title">THE WEIGHT OF VELOCITY</h2>
-            <p class="scene-narrative">Racers do not look for speed. They look for grams. Less mass changes how a machine steers, accelerates, and stops. The Titanium Exhaust system removes 3.4 kg from the chassis' core, tuning race-derived acoustics.</p>
-            <!-- Animated CSS comparison bar chart -->
-            <div class="chart-container">
-              <div class="chart-bar-wrapper">
-                <div class="chart-label">OEM STEEL</div>
-                <div class="chart-bar-bg"><div class="chart-bar-fill steel" style="width: 100%;"></div></div>
-                <div class="chart-value">8.2 KG</div>
-              </div>
-              <div class="chart-bar-wrapper">
-                <div class="chart-label">RACE TITANIUM</div>
-                <div class="chart-bar-bg"><div class="chart-bar-fill titanium" data-width="58" style="width: 0%;"></div></div>
-                <div class="chart-value highlight">4.8 KG</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scene 6: The Engine -->
-        <div class="story-scene" id="story-scene-6">
-          <div class="editorial-layout split-dashboard">
-            <div class="split-side left">
-              <h2 class="scene-accent">03. POWERPLANT</h2>
-              <h2 class="editorial-title">THE DESMOSEDICI HEART</h2>
-              <p class="scene-narrative">Why the V4? Ducati chose this MotoGP architecture for compact packaging and balanced rotational mass. Its Desmodromic valve control replaces conventional return springs with mechanical closures, allowing engine speeds to reach 13,000 RPM without valve float.</p>
-            </div>
-            <div class="split-side right">
-              <div class="dashboard-spec-card">
-                <div class="spec-card-num" data-target="215">0</div>
-                <div class="spec-card-label">HORSEPOWER OUTPUT</div>
-              </div>
-              <div class="dashboard-spec-card">
-                <div class="spec-card-num" data-target="13000">0</div>
-                <div class="spec-card-label">RPM PEAK LIMIT</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scene 7: Suspension -->
-        <div class="story-scene" id="story-scene-7">
-          <div class="editorial-layout left-aligned">
-            <h2 class="scene-accent">04. DAMPER SYSTEMS</h2>
-            <h2 class="editorial-title">PRECISION AND FEEL</h2>
-            <p class="scene-narrative">Corner entry is decided by trust. Precision is decided by feel. The Öhlins EC 2.0 electronic front forks monitor vertical loads and chassis angle, adjusting oil flow in microseconds to stabilize the chassis as the track slides underneath.</p>
-          </div>
-        </div>
-
-        <!-- Scene 8: Braking -->
-        <div class="story-scene" id="story-scene-8">
-          <div class="editorial-layout right-aligned">
-            <h2 class="scene-accent">05. DECELERATION</h2>
-            <h2 class="editorial-title">THE STOPPING LIMIT</h2>
-            <p class="scene-narrative">Braking later means arriving faster. Stopping is performance. Brembo Stylema R monobloc calipers apply absolute hydraulic force onto steel racing rotors, dissipating thermal load to deliver surgical braking response.</p>
-          </div>
-        </div>
-
-        <!-- Scene 9: Engineering Statistics -->
-        <div class="story-scene" id="story-scene-9">
-          <div class="editorial-layout centered spec-dashboard">
-            <h2 class="editorial-title">PROOF OF ENGINEERING</h2>
-            <p class="scene-narrative-short">Numbers conclude the story. They do not begin it. Proof of everything engineered.</p>
-            
-            <div class="stats-panel-grid">
-              <div class="stat-box">
-                <span class="stat-box-value" data-counter="215">0</span>
-                <span class="stat-box-label">POWER (HP)</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-box-value" data-counter="123">0</span><span class="stat-box-value decimal">.6</span>
-                <span class="stat-box-label">TORQUE (Nm)</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-box-value" data-counter="172">0</span>
-                <span class="stat-box-label">DRY MASS (KG)</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-box-value" data-counter="315">0</span><span class="stat-box-value decimal">+</span>
-                <span class="stat-box-label">TOP SPEED (KM/H)</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-box-value" data-counter="1103">0</span>
-                <span class="stat-box-label">DISPLACEMENT (CC)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scene 10: Legacy Timeline -->
-        <div class="story-scene" id="story-scene-10">
-          <div class="editorial-layout centered timeline-layout">
-            <h2 class="editorial-title font-small">MILESTONES OF LEGACY</h2>
-            
-            <div class="timeline-visual-container">
-              <!-- Slider Indicator Dot -->
-              <div class="timeline-slider-line">
-                <div class="timeline-slider-dot" id="timeline-dot"></div>
-              </div>
-              <!-- Timeline nodes -->
-              <div class="timeline-years-grid">
-                <div class="timeline-node" data-pos="0">
-                  <span class="timeline-year">1926</span>
-                  <span class="timeline-event">FOUNDATION</span>
-                </div>
-                <div class="timeline-node" data-pos="25">
-                  <span class="timeline-year">1972</span>
-                  <span class="timeline-event">FIRST SUPERBIKE V-TWIN</span>
-                </div>
-                <div class="timeline-node" data-pos="50">
-                  <span class="timeline-year">1994</span>
-                  <span class="timeline-event">THE 916 LEGEND</span>
-                </div>
-                <div class="timeline-node" data-pos="75">
-                  <span class="timeline-year">2007</span>
-                  <span class="timeline-event">MOTOGP CHAMPION</span>
-                </div>
-                <div class="timeline-node" data-pos="100">
-                  <span class="timeline-year">2022+</span>
-                  <span class="timeline-event">PANIGALE V4 REVOLUTION</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scene 11: Electronics Suite -->
-        <div class="story-scene" id="story-scene-11">
-          <div class="editorial-layout centered electronics-layout">
-            <h2 class="editorial-title">INVISIBLE INTELLIGENCE</h2>
-            <p class="scene-narrative-short">Software assists the rider without replacing human skill. Computational dynamics operating quietly in the background.</p>
-            
-            <div class="electronics-cards-grid">
-              <div class="tech-card">
-                <div class="tech-card-icon">ABS</div>
-                <h4 class="tech-card-title">Cornering ABS</h4>
-                <p class="tech-card-text">Adjusts hydraulic pressure relative to lean angle, preventing wheel lock mid-corner.</p>
-              </div>
-              <div class="tech-card">
-                <div class="tech-card-icon">DTC</div>
-                <h4 class="tech-card-title">Traction Control</h4>
-                <p class="tech-card-text">Reads wheel speed difference to manage ignition torque, stabilizing rear grip.</p>
-              </div>
-              <div class="tech-card">
-                <div class="tech-card-icon">DWC</div>
-                <h4 class="tech-card-title">Wheelie Control</h4>
-                <p class="tech-card-text">Monitors front wheel lift, smooths out throttle butterfly to maximize forward force.</p>
-              </div>
-              <div class="tech-card">
-                <div class="tech-card-icon">DQS</div>
-                <h4 class="tech-card-title">Quick Shifter</h4>
-                <p class="tech-card-text">Seamless gear shifts without clutch inputs, maintaining engine drive pressure.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Scene 12: Racing DNA -->
-        <div class="story-scene" id="story-scene-12">
-          <div class="editorial-layout centered">
-            <h2 class="editorial-title">FROM PADDOCK TO ROAD</h2>
-            <p class="scene-narrative italic max-width">"Every championship lap informs the road machine. The Desmosedici is not built to replicate racing technology. It is racing technology, built for the street. Racing is our DNA."</p>
-          </div>
-        </div>
-
-        <!-- Scene 13: Materials Science -->
-        <div class="story-scene" id="story-scene-13">
-          <div class="editorial-layout left-aligned materials-layout">
-            <h2 class="scene-accent">06. METALLURGY</h2>
-            <h2 class="editorial-title">REFUSAL TO COMPROMISE</h2>
-            <p class="scene-narrative">Engineering is always a compromise between strength and mass. We refused to compromise. Every component utilizes high-tier metallurgy selected for single structural advantages: Titanium engine mount bolts, Forged Aluminum wheels, Carbon Fiber fairings, Magnesium engine casings, and high-tensile Steel trellis structures.</p>
-          </div>
-        </div>
-
-        <!-- Scene 14: Final Reassembly -->
-        <div class="story-scene" id="story-scene-14">
-          <div class="editorial-layout centered">
-            <h2 class="editorial-title">GREATER THAN THE SUM</h2>
-            <p class="scene-narrative">As the components converge back to center, the individual parts become one integrated speed system. The machine becomes greater than the sum of its parts.</p>
-          </div>
-        </div>
-
-        <!-- Scene 15: Final Showcase (The ending hold) -->
+        <!-- Scene 15: Final Specs Reveal (State 3) -->
         <div class="story-scene" id="story-scene-15">
           <div class="editorial-layout centered finale-layout">
-            <p class="finale-philosophy">"Performance is not assembled in a factory.<br>It is engineered through thousands of decisions."</p>
             <h1 class="premium-header final-glow">DESMOSEDICI</h1>
-            <p class="premium-sub">Engineered Without Compromise.</p>
+            <p class="premium-sub">Ducati Panigale V4</p>
             
             <div class="finale-specs">
-              <div class="f-spec"><span class="fs-num">215 HP</span><span class="fs-lbl">POWER</span></div>
-              <div class="f-spec"><span class="fs-num">172 KG</span><span class="fs-lbl">DRY MASS</span></div>
               <div class="f-spec"><span class="fs-num">1,103 CC</span><span class="fs-lbl">ENGINE</span></div>
-            </div>
-            
-            <div class="cta-container">
-              <a href="#" class="premium-button">Request Commission</a>
+              <div class="f-spec"><span class="fs-num">215 HP</span><span class="fs-lbl">POWER</span></div>
+              <div class="f-spec"><span class="fs-num">123.6 NM</span><span class="fs-lbl">TORQUE</span></div>
+              <div class="f-spec"><span class="fs-num">172 KG</span><span class="fs-lbl">WEIGHT</span></div>
+              <div class="f-spec"><span class="fs-num">315+ KM/H</span><span class="fs-lbl">TOP SPEED</span></div>
             </div>
           </div>
         </div>
         
-      </div>
-
-      <!-- Minimal Progress bar indicator -->
-      <div class="progress-bar-container">
-        <div class="progress-bar-label">DOCUMENTARY</div>
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progress-fill"></div>
-        </div>
-        <div class="progress-bar-value" id="progress-val">00%</div>
       </div>
 
     </div>

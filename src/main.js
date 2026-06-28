@@ -4,11 +4,9 @@ import { LAYOUT } from './config/layout.js';
 import { MOTION } from './config/motion.js';
 import { COLORS } from './config/colors.js';
 import { TYPOGRAPHY } from './config/typography.js';
-import { CALLOUTS } from './config/callouts.js';
 import { preloader } from './preloader.js';
 import { engine } from './engine.js';
 import { scrollTimeline } from './timeline.js';
-import { calloutSystem } from './callouts.js';
 import { mouseInteraction } from './mouse.js';
 import { editorialSections } from './content/editorial.js';
 
@@ -25,19 +23,13 @@ class Application {
     this.lastFpsTime = performance.now();
     this.frameCount = 0;
     this.fps = 60;
-    
-    // Stats count-up activation flags
-    this.statsTriggered = {
-      scene6: false,
-      scene9: false
-    };
   }
 
   init() {
-    // 1. Inject design system tokens into CSS :root (Single Source of Truth)
+    // 1. Inject design system tokens into CSS :root
     this.injectDesignTokens();
 
-    // 2. Render Act II editorial articles dynamically from database
+    // 2. Render Act II editorial articles dynamically
     this.renderActII();
 
     // 3. Setup dev-only runtime debug triggers
@@ -89,10 +81,8 @@ class Application {
     const root = document.getElementById('editorial-root');
     if (!root) return;
 
-    // Clear static Level 1 fallback copy
     root.innerHTML = '';
 
-    // Loop and generate elements dynamically from database
     editorialSections.forEach(section => {
       const article = document.createElement('article');
       article.className = `editorial-section ${section.type}-section`;
@@ -118,7 +108,6 @@ class Application {
           </div>
         `;
       } else if (section.type === 'banner') {
-        // First image uses eager loading & high priority. Subsequent images use lazy loading
         const isFirst = section.id === 'editorial-hero-banner';
         contentHTML = `
           <div class="editorial-container fade-up" style="max-width: 100%; padding-inline: 0;">
@@ -315,7 +304,6 @@ class Application {
     
     // Core systems
     scrollTimeline.init('scrolly-section', 'viewport');
-    calloutSystem.init('callouts-container', 'svg-overlay', 'scrolly-canvas');
     mouseInteraction.init('canvas-wrapper');
 
     // Register Act II dynamic scroll trigger animations
@@ -344,11 +332,10 @@ class Application {
 
     const frameIndex = TIMELINE.getFrameForProgress(this.currentProgress);
 
-    // Canvas draw and overlay shift coordinating
+    // Canvas draw coordinating
     engine.draw(frameIndex);
-    calloutSystem.update(frameIndex);
 
-    // Dynamic scene text fades and number count-ups
+    // Dynamic scene text fades
     this.updateScenes(this.currentProgress);
 
     // Developer debug Overlay ticker update
@@ -365,69 +352,29 @@ class Application {
       }
     }
 
-    if (activeScene && activeScene.textElementId !== this.activeSceneId) {
+    if (activeScene) {
+      if (activeScene.textElementId !== this.activeSceneId) {
+        if (this.activeSceneId) {
+          const prevEl = document.getElementById(this.activeSceneId);
+          if (prevEl) prevEl.classList.remove('active');
+        }
+
+        this.activeSceneId = activeScene.textElementId;
+        const nextEl = document.getElementById(this.activeSceneId);
+        if (nextEl) nextEl.classList.add('active');
+      }
+    } else {
+      // Smoothly hide text overlay when scrolling through intermediate frames (State 2)
       if (this.activeSceneId) {
         const prevEl = document.getElementById(this.activeSceneId);
         if (prevEl) prevEl.classList.remove('active');
+        this.activeSceneId = null;
       }
-
-      this.activeSceneId = activeScene.textElementId;
-      const nextEl = document.getElementById(this.activeSceneId);
-      if (nextEl) nextEl.classList.add('active');
-
-      this.triggerCounters(activeScene.id);
     }
-  }
-
-  triggerCounters(sceneId) {
-    if (sceneId === 'scene-6' && !this.statsTriggered.scene6) {
-      this.statsTriggered.scene6 = true;
-      const nums = document.querySelectorAll('#story-scene-6 .spec-card-num');
-      nums.forEach(el => {
-        const target = parseInt(el.getAttribute('data-target'), 10);
-        this.animateCountUp(el, target);
-      });
-    }
-
-    if (sceneId === 'scene-9' && !this.statsTriggered.scene9) {
-      this.statsTriggered.scene9 = true;
-      const stats = document.querySelectorAll('#story-scene-9 .stat-box-value:not(.decimal)');
-      stats.forEach(el => {
-        const target = parseInt(el.getAttribute('data-counter'), 10);
-        this.animateCountUp(el, target);
-      });
-    }
-
-    if (sceneId === 'scene-1' || sceneId === 'scene-15') {
-      this.statsTriggered.scene6 = false;
-      this.statsTriggered.scene9 = false;
-    }
-  }
-
-  animateCountUp(el, target, duration = 1200) {
-    const startTime = performance.now();
-    const step = (now) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeProgress = progress * (2 - progress);
-      const currentVal = Math.floor(easeProgress * target);
-
-      if (target === 13000) {
-        el.textContent = currentVal.toLocaleString();
-      } else {
-        el.textContent = currentVal;
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
-    };
-    requestAnimationFrame(step);
   }
 
   // Developers debug pane initializers
   initDebugOverlay() {
-    // Only bind if running locally (e.g. localhost, 127.0.0.1) to avoid production bleed
     const isLocal = window.location.hostname === 'localhost' || 
                     window.location.hostname === '127.0.0.1' ||
                     window.location.hostname === '';
