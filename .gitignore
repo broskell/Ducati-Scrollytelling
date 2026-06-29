@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production build output
+dist/
+build/
+
+# Local env files
+.env*.local
+
+# Editor/Workspace configs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Gemini/Agent workspace configs
+.gemini/
+.agents/
+*.log
