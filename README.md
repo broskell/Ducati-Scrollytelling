@@ -50,8 +50,9 @@ The codebase separates the design system tokens, copy database, rendering engine
 
 ```
 ducati-scrollytelling/
-├── assets/                # High-resolution editorial photographs
-├── frames/                # 51 cinematic motorcycle render frames
+├── public/                # Static assets served at root
+│   ├── assets/            # High-resolution editorial photographs
+│   └── frames/            # 51 cinematic motorcycle render frames
 ├── screenshots/           # Case study visual showcase
 ├── src/
 │   ├── config/            # Design System Layer
