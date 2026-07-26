@@ -7,6 +7,7 @@ import { TYPOGRAPHY } from './config/typography.js';
 import { preloader } from './preloader.js';
 import { engine } from './engine.js';
 import { scrollTimeline } from './timeline.js';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { mouseInteraction } from './mouse.js';
 import {
   editorialSections,
@@ -57,6 +58,10 @@ class Application {
       (pct) => this.onPreloadProgress(pct),
       (images) => this.onAssetsLoaded()
     );
+
+    // 7. Setup glass header scroll listener and dynamic telemetry loop
+    this.initHeaderScrollListener();
+    this.initTelemetryLoop();
   }
 
   injectDesignTokens() {
@@ -294,7 +299,7 @@ class Application {
     footer.className = 'editorial-footer fade-up';
     footer.innerHTML = `
       <div class="footer-divider"></div>
-      <h1 class="footer-title">DESMOSEDICI</h1>
+      <h1 class="footer-title">Desmosedici</h1>
       <h2 class="footer-subtitle">Engineered Without Compromise.</h2>
       <p class="footer-paragraph">Ducati design and engineering represents an absolute commitment to performance, where every surface, tolerance, and component serves to enhance mechanical flow. The Desmosedici Stradale remains a testament to what is possible when form follows function at 300 kilometers per hour.</p>
     `;
@@ -323,7 +328,16 @@ class Application {
   onAssetsLoaded() {
     console.log('Chassis Systems Ready.');
     
-    // Core systems
+    // 1. Enable page scrolling first by removing the loading lock class
+    document.body.classList.remove('loading');
+
+    // 2. Add visible class to home pane to trigger fade-in transition
+    const homePane = document.getElementById('tab-section-home');
+    if (homePane) {
+      homePane.classList.add('visible');
+    }
+
+    // 3. Core systems
     scrollTimeline.init('scrolly-section', 'viewport');
     mouseInteraction.init('canvas-wrapper');
 
@@ -336,16 +350,16 @@ class Application {
     engine.resize();
     engine.draw(1, true);
 
-    // Enable page scrolling by removing the loading lock class
-    document.body.classList.remove('loading');
-
-    // Smoothly fade out the preloader overlay
+    // 4. Smoothly fade out the preloader overlay
     const preloaderOverlay = document.getElementById('preloader');
     if (preloaderOverlay) {
       preloaderOverlay.classList.add('fade-out');
       // Remove from DOM after transition completes to save layers
       setTimeout(() => {
         preloaderOverlay.style.display = 'none';
+        
+        // Recalculate ScrollTrigger positions now that DOM layout has settled and preloader is hidden
+        ScrollTrigger.refresh();
       }, 800);
     }
 
@@ -489,6 +503,59 @@ class Application {
       `;
       container.appendChild(cardEl);
     });
+  }
+
+  // Awwwards glass header scroll lock listener
+  initHeaderScrollListener() {
+    const header = document.querySelector('.microsite-header');
+    if (!header) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  }
+
+  // Dynamic F1 telemetry ticking dashboard loop
+  initTelemetryLoop() {
+    setInterval(() => {
+      // Only update if the technical tab is selected
+      if (this.activeTab !== 'technical') return;
+
+      const leanEl = document.getElementById('hud-lean');
+      const brakeEl = document.getElementById('hud-brake');
+      const rollEl = document.getElementById('hud-roll');
+      const slipEl = document.getElementById('hud-slip');
+      const flowEl = document.getElementById('telemetry-flow');
+
+      if (leanEl) {
+        // Realistic roll angles in lean (fluctuate around 40-48 deg)
+        const lean = (40.5 + Math.sin(Date.now() / 800) * 6.5).toFixed(1);
+        leanEl.textContent = `LEAN ANGLE: ${lean}°`;
+      }
+      if (brakeEl) {
+        // Realistic brake pressure cycling
+        const cycle = Math.sin(Date.now() / 1500);
+        const brake = (cycle > 0.3) ? (4.2 + Math.cos(Date.now() / 300) * 5.8).toFixed(1) : '0.0';
+        brakeEl.textContent = `BRAKE PRES: ${brake} bar`;
+      }
+      if (rollEl) {
+        const roll = (Math.sin(Date.now() / 600) * 1.2).toFixed(1);
+        const pitch = (Math.cos(Date.now() / 900) * 0.6).toFixed(1);
+        rollEl.textContent = `ROLL/PITCH: ${roll}° / ${pitch}°`;
+      }
+      if (slipEl) {
+        const slip = (1.0 + Math.abs(Math.sin(Date.now() / 500)) * 0.12).toFixed(2);
+        slipEl.textContent = `TC SLIP INDEX: ${slip}`;
+      }
+      if (flowEl) {
+        const speed = (285.0 + Math.sin(Date.now() / 500) * 14.0).toFixed(1);
+        flowEl.textContent = `FLOW-VELOCITY: ${speed} KM/H`;
+      }
+    }, 100);
   }
 
   // Initialize navigation link click listeners (Awwwards-inspired fades)

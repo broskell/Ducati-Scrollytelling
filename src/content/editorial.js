@@ -5,7 +5,7 @@ export const editorialSections = [
   {
     id: 'editorial-intro',
     type: 'centered-text',
-    title: 'THE ART OF ESCAPE',
+    title: 'The Art of Escape',
     subtitle: 'Ducati Panigale V4',
     body: 'The Panigale V4 is more than a superbike. It represents the direct translation of racetrack technology into an absolute expression of street-legal speed. Designed for riders who refuse compromise, it is a precision tool crafted for ultimate performance.',
     meta: 'Act II — Detailed Mechanics'
@@ -13,14 +13,14 @@ export const editorialSections = [
   {
     id: 'editorial-philosophy',
     type: 'left-aligned-narrative',
-    title: 'THE PURSUIT OF LIGHTNESS',
+    title: 'The Pursuit of Lightness',
     subtitle: 'Engineering Philosophy',
     body: 'Every single component of the Panigale V4 exists for one purpose: to speed up kinetic transition. By optimizing wall thicknesses and shaving structural mass, weight is concentrated around the crankshaft rotation axis, minimizing inertial resistance. In racing, a gram is a unit of lap time.'
   },
   {
     id: 'editorial-design',
     type: 'feature-block',
-    title: 'DESIGN LANGUAGE',
+    title: 'Design Language',
     subtitle: 'Form Driven by Airflow',
     body: 'The silhouette of the Panigale V4 is defined by aerodynamic efficiency. Aggressive, sweeping fairings draw air through internal cooling matrices, while double-profile carbon fiber winglets generate 37 kg of downforce at 300 km/h. This vertical pressure anchors the front wheel, suppressing lift during acceleration.',
     image: 'assets/ducati_fairing.png',
@@ -30,7 +30,7 @@ export const editorialSections = [
   {
     id: 'editorial-engine',
     type: 'split-dashboard',
-    title: 'DESMOSEDICI STRADALE',
+    title: 'Desmosedici Stradale',
     subtitle: 'The Heart of MotoGP',
     body: 'Derived directly from the Desmosedici GP engine, this 1,103 cc 90° V4 utilizes a counter-rotating crankshaft to offset wheel gyroscopic forces. Combined with desmodromic valve actuation—which mechanically closes valves instead of relying on springs—the Stradale revs reliably up to 13,000 RPM, delivering 215 horsepower of high-revving peak power.',
     image: 'assets/ducati_engine.png',
@@ -45,7 +45,7 @@ export const editorialSections = [
   {
     id: 'editorial-aerodynamics',
     type: 'centered-diagram',
-    title: 'PRESSURE DYNAMICS',
+    title: 'Pressure Dynamics',
     subtitle: 'Wind Tunnel Refined Profile',
     body: 'Laminar flow analysis shapes every intake cowl and extract duct. Air is forced through lateral heat exchangers, venting boundary-layer drag beneath the rider’s knees. Vertical drag wing elements stabilize yaw during high-angle corner entries, maintaining high chassis balance.',
     vector: true
@@ -53,7 +53,7 @@ export const editorialSections = [
   {
     id: 'editorial-rider',
     type: 'feature-block',
-    title: 'RIDER INTERACTION',
+    title: 'Rider Interaction',
     subtitle: 'The Seating Triangle',
     body: 'The ergonomic design is configured for absolute control. A narrow tank shape allows the rider to lock in with their knees during heavy braking phases, relieving stress on the wrists. The flat, broad seat provides freedom of movement, letting the rider transition off the bike during hanging corner sweeps.',
     image: 'assets/ducati_cockpit.png',
@@ -63,7 +63,7 @@ export const editorialSections = [
   {
     id: 'editorial-materials',
     type: 'materials-grid',
-    title: 'METALLURGY & COMPOSITES',
+    title: 'Metallurgy & Composites',
     subtitle: 'The Periodic Table of Performance',
     body: 'To construct a chassis that yields structural flex without cracking, Ducati engineers alternate material properties across critical load paths.',
     materials: [
@@ -76,7 +76,7 @@ export const editorialSections = [
   {
     id: 'editorial-suspension',
     type: 'split-dashboard',
-    title: 'SUSPENSION & STOPPING FORCE',
+    title: 'Suspension & Stopping Force',
     subtitle: 'Chassis Deceleration',
     body: 'Deceleration requires as much control as acceleration. The chassis matches semi-active Öhlins NPX pressurized forks with monoblock Brembo Stylema calipers. Dynamic adjustments alter hydraulic damping configurations in milliseconds, preventing front-end dive and stabilizing vertical geometry during heavy braking entries.',
     image: 'assets/ducati_suspension.png',
@@ -90,7 +90,7 @@ export const editorialSections = [
   {
     id: 'editorial-electronics',
     type: 'electronics-grid',
-    title: 'COGNITIVE ASSIST',
+    title: 'Cognitive Assist',
     subtitle: '6-Axis IMU Platform',
     body: 'An advanced Bosch inertial platform monitors pitch, roll, and yaw angles in real time, governing rider safety aids without diluting raw feedback.',
     cards: [
@@ -103,7 +103,7 @@ export const editorialSections = [
   {
     id: 'editorial-heritage',
     type: 'heritage-timeline',
-    title: 'RACING DNA CHRONOLOGY',
+    title: 'Racing DNA Chronology',
     subtitle: 'MotoGP Derived Evolution',
     timeline: [
       { year: '1926', event: 'Company founded as radio manufacturer' },
@@ -116,7 +116,7 @@ export const editorialSections = [
   {
     id: 'editorial-specs-grid',
     type: 'specs-grid',
-    title: 'TECHNICAL SPECIFICATIONS',
+    title: 'Technical Specifications',
     subtitle: 'Performance Metrics',
     specs: [
       { label: 'Displacement', value: '1,103 cc' },
@@ -132,7 +132,7 @@ export const editorialSections = [
   {
     id: 'editorial-philosophy-end',
     type: 'centered-quote',
-    title: 'THE ESSENCE OF FORM',
+    title: 'The Essence of Form',
     subtitle: 'Chassis Philosophy',
     body: '“Performance is not assembled in a factory. It is engineered through thousands of decisions.”'
   }
@@ -140,7 +140,7 @@ export const editorialSections = [
 
 // 2. Evolution Section Database
 export const evolutionData = {
-  title: 'Seven decades of pressure, speed, and rules.',
+  title: 'Seven Decades of Pressure, Speed & Innovation.',
   subtitle: 'A focused archive of the major design eras that turned simple racing machines into carbon, hybrid, ground-effect laboratories.',
   cards: [
     {
@@ -183,7 +183,7 @@ export const evolutionData = {
 
 // 3. Mechanical Components Database
 export const mechanicalData = {
-  title: 'Every major assembly, explained cleanly.',
+  title: 'Every Major Assembly, Explained.',
   subtitle: 'A professional component view for the systems that define a superbike: structure, suspension, braking, cooling, exhaust, and aerodynamics.',
   cards: [
     {
@@ -227,7 +227,7 @@ export const mechanicalData = {
 
 // 4. Technical Electronic Systems Database
 export const technicalData = {
-  title: 'Inertial Cognitive Assist.',
+  title: 'Engineering Intelligence in Motion.',
   subtitle: 'An advanced 6-axis Bosch IMU measures chassis roll, pitch, and yaw in milliseconds to govern riding assistance programs dynamically.',
   cards: [
     {
@@ -255,7 +255,7 @@ export const technicalData = {
 
 // 5. Legends Section Database
 export const legendsData = {
-  title: 'them.',
+  title: 'Legends',
   subtitle: 'Four racing legends chosen for world championships, absolute desmo racecraft, and era-defining dominance.',
   cards: [
     {

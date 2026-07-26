@@ -8,9 +8,8 @@
 }
 
 :root {
-  /* Foundation Tokens */
-  --font-serif: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'IM Fell English', Georgia, serif;
+  --font-sans: 'Geist', -apple-system, sans-serif;
   --font-editorial: 'Cormorant Garamond', Georgia, serif;
   --color-bg-primary: #000000;
   --color-text-primary: #ffffff;
@@ -336,7 +335,7 @@ canvas {
   letter-spacing: clamp(12px, 1.8vw, 30px);
   text-indent: clamp(12px, 1.8vw, 30px);
   color: var(--text-primary);
-  text-transform: uppercase;
+  text-transform: none;
   margin-bottom: 8px;
   text-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
 }
@@ -357,14 +356,16 @@ canvas {
 }
 
 .editorial-title {
-  font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 3.2vw, 3rem);
-  font-weight: 300;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  line-height: 1.2;
-  color: var(--text-primary);
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-size: clamp(5rem, 8vw, 8rem) !important;
+  font-weight: 400 !important;
+  line-height: 0.86 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: none !important;
+  margin-bottom: var(--space-xs) !important;
+  color: var(--text-primary) !important;
+  max-width: 60% !important;
 }
 
 .editorial-title.font-small {
@@ -681,13 +682,14 @@ canvas {
 }
 
 .footer-title {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-hero);
-  font-weight: 300;
-  letter-spacing: 12px;
-  text-indent: 12px;
-  color: var(--color-text-primary);
-  text-transform: uppercase;
+  font-family: 'Monsieur La Doulaise', cursive !important;
+  font-size: clamp(3.5rem, 7vw, 5.5rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  text-indent: 0 !important;
+  color: var(--color-text-primary) !important;
+  text-transform: none !important;
+  line-height: 0.86 !important;
 }
 
 .footer-subtitle {
@@ -765,7 +767,7 @@ canvas {
 
 .section-hero-split {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-md);
   align-items: center;
   margin-bottom: var(--space-md);
@@ -780,13 +782,31 @@ canvas {
 
 .tab-pane .premium-header {
   font-family: var(--font-editorial) !important;
-  font-size: clamp(2.4rem, 4.8vw, 4.2rem) !important;
-  font-weight: 300 !important;
-  letter-spacing: -0.02em !important;
+  font-size: clamp(3.2rem, 5.2vw, 4.8rem) !important;
+  font-weight: 400 !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.03em !important;
+  max-width: 100% !important;
   text-indent: 0 !important;
   text-transform: none !important;
-  line-height: 1.0 !important;
   margin-bottom: var(--space-xs) !important;
+}
+
+@media (max-width: 1024px) {
+  .tab-pane .premium-header {
+    font-size: clamp(2.8rem, 4.5vw, 3.8rem) !important;
+    line-height: 0.95 !important;
+  }
+  .section-hero-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .tab-pane .premium-header {
+    font-size: clamp(2.2rem, 5vw, 3rem) !important;
+    line-height: 1.0 !important;
+  }
 }
 
 .hero-right {
@@ -862,12 +882,12 @@ canvas {
 }
 
 .preloader-brand {
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: 0.5rem;
+  font-family: 'Monsieur La Doulaise', cursive !important;
+  font-size: 4.8rem !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
   color: var(--color-text-primary);
-  text-shadow: 0 0 15px rgba(212, 0, 31, 0.4);
+  text-transform: none !important;
 }
 
 .loader-track {
@@ -887,7 +907,7 @@ canvas {
 
 .loader-status {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   letter-spacing: 0.15rem;
   color: var(--color-text-muted);
 }
@@ -907,57 +927,80 @@ canvas {
   background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
   backdrop-filter: blur(4px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition: background-color 0.4s var(--ease-transition),
+              backdrop-filter 0.4s var(--ease-transition),
+              border-color 0.4s var(--ease-transition),
+              height 0.4s var(--ease-transition);
+}
+
+.microsite-header.scrolled {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  height: 60px;
 }
 
 .header-logo {
-  display: flex;
-  align-items: center;
-  font-family: var(--font-editorial);
-  font-size: 1.25rem;
-  font-weight: 400;
-  letter-spacing: 0.05rem;
+  font-family: 'Monsieur La Doulaise', cursive !important;
+  font-size: 2.8rem !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
   color: var(--color-text-primary);
-  text-shadow: 0 0 10px rgba(255,255,255,0.2);
+  text-transform: none !important;
 }
 
 .header-nav {
   display: flex;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  align-items: center;
 }
 
 .nav-link {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.15rem;
-  color: var(--color-text-muted);
+  font-family: var(--font-sans) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18rem !important;
+  text-transform: uppercase !important;
+  color: var(--color-text-secondary);
   text-decoration: none;
-  text-transform: uppercase;
   padding: 8px 0;
-  border-bottom: 1px solid transparent;
-  transition: color var(--duration-micro) var(--ease-micro),
-              border-color var(--duration-micro) var(--ease-micro),
-              text-shadow var(--duration-micro) var(--ease-micro);
+  position: relative;
+  transition: color var(--duration-micro) var(--ease-micro);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-accent-red);
+  transition: width 0.3s var(--ease-micro);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: var(--color-text-primary);
-  border-color: var(--color-accent-red);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .header-action .action-btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
   color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  padding: var(--space-3xs) var(--space-2xs);
+  font-family: var(--font-sans) !important;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12rem;
+  padding: 6px 16px;
   cursor: pointer;
+  text-transform: uppercase;
   transition: border-color var(--duration-micro) var(--ease-micro),
               background var(--duration-micro) var(--ease-micro),
               color var(--duration-micro) var(--ease-micro);
@@ -993,8 +1036,9 @@ canvas {
 
 .tab-pane.visible {
   opacity: 1;
-  transform: translateY(0);
-  filter: blur(0px);
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
 }
 
 /* General Layout Padding */
