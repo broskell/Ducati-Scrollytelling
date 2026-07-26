@@ -8,7 +8,7 @@
 }
 
 :root {
-  --font-serif: 'IM Fell English', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Geist', -apple-system, sans-serif;
   --font-editorial: 'Cormorant Garamond', Georgia, serif;
   --color-bg-primary: #000000;
@@ -356,7 +356,7 @@ canvas {
 }
 
 .editorial-title {
-  font-family: var(--font-serif) !important;
+  font-family: 'IM Fell English', Georgia, serif !important;
   font-style: italic !important;
   font-size: clamp(5rem, 8vw, 8rem) !important;
   font-weight: 400 !important;
