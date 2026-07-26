@@ -40,7 +40,13 @@
 
   <!-- Fixed Premium Top Navigation Header -->
   <header class="microsite-header">
-    <div class="header-logo">DESMOSEDICI — 01</div>
+    <div class="header-logo">
+      <svg class="brand-logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px; fill: var(--color-accent-red); margin-right: 8px;">
+        <path d="M12 2L2 7V12C2 17.5 12 22 12 22C12 22 22 17.5 22 12V7L12 2Z" stroke="var(--color-accent-red)" stroke-width="2" fill="none"/>
+        <path d="M12 6L6 11H18L12 6Z" fill="var(--color-accent-red)"/>
+      </svg>
+      <span>DESMOSEDICI <span class="logo-sub" style="font-family: var(--font-serif); font-size: 0.9rem; margin-left: 4px; opacity: 0.8; letter-spacing: 0.1rem;">— 01</span></span>
+    </div>
     <nav class="header-nav">
       <a href="#home" class="nav-link active" data-tab="home">HOME</a>
       <a href="#evolution" class="nav-link" data-tab="evolution">EVOLUTION</a>
@@ -72,41 +78,15 @@
           
           <!-- Instant First-Frame Placeholder -->
           <img id="fallback-img" src="frames/ezgif-frame-001.png" alt="Ducati V4" class="first-frame-placeholder">
-
+ 
           <!-- Canvas Rendering Engine Wrapper -->
           <div class="canvas-wrapper" id="canvas-wrapper">
             <canvas id="scrolly-canvas"></canvas>
           </div>
-
-          <!-- Narrative Overlay Layer (States 1 and 3) -->
-          <div class="story-overlay-container">
-            
-            <!-- Scene 1: Opening Hero Title -->
-            <div class="story-scene active" id="story-scene-1">
-              <div class="editorial-layout centered">
-                <h1 class="premium-header animate-header">DESMOSEDICI</h1>
-                <p class="premium-sub">Engineering in Motion.</p>
-              </div>
-            </div>
-
-            <!-- Scene 15: Final Specs Reveal (State 3) -->
-            <div class="story-scene" id="story-scene-15">
-              <div class="editorial-layout centered finale-layout">
-                <h1 class="premium-header final-glow">DESMOSEDICI</h1>
-                <p class="premium-sub">Ducati Panigale V4</p>
-                
-                <div class="finale-specs">
-                  <div class="f-spec"><span class="fs-num">1,103 CC</span><span class="fs-lbl">ENGINE</span></div>
-                  <div class="f-spec"><span class="fs-num">215 HP</span><span class="fs-lbl">POWER</span></div>
-                  <div class="f-spec"><span class="fs-num">123.6 NM</span><span class="fs-lbl">TORQUE</span></div>
-                  <div class="f-spec"><span class="fs-num">172 KG</span><span class="fs-lbl">WEIGHT</span></div>
-                  <div class="f-spec"><span class="fs-num">315+ KM/H</span><span class="fs-lbl">TOP SPEED</span></div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-
+ 
+          <!-- Narrative Overlay Layer Removed for Clean Scrollytelling Focus -->
+          <div class="story-overlay-container" style="display: none;"></div>
+ 
         </div>
       </main>
 
