@@ -9,8 +9,8 @@
 
 :root {
   /* Foundation Tokens */
-  --font-serif: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Outfit', -apple-system, sans-serif;
   --color-bg-primary: #000000;
   --color-text-primary: #ffffff;
   --color-text-secondary: rgba(255, 255, 255, 0.72);
@@ -83,6 +83,11 @@
 
 html {
   scroll-behavior: auto;
+}
+
+body.loading {
+  overflow: hidden !important;
+  height: 100vh !important;
 }
 
 body {
@@ -1152,4 +1157,34 @@ canvas {
   .header-action {
     display: none; /* Hide action button on mobile to save spacing */
   }
+}
+
+/* Aerodynamic streamline animations */
+@keyframes flow-stream {
+  from {
+    stroke-dashoffset: 400;
+  }
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+.streamline {
+  animation: flow-stream 3.5s linear infinite;
+}
+
+.streamline.line-1 {
+  animation-duration: 2.5s;
+}
+
+.streamline.line-2 {
+  animation-duration: 2s;
+}
+
+.streamline.line-3 {
+  animation-duration: 1.5s;
+}
+
+.streamline.line-4 {
+  animation-duration: 3s;
 }

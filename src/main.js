@@ -332,6 +332,13 @@ class Application {
 
     this.initialized = true;
 
+    // Force canvas resize and draw initial frame 1 to prevent layout-settling blank states
+    engine.resize();
+    engine.draw(1, true);
+
+    // Enable page scrolling by removing the loading lock class
+    document.body.classList.remove('loading');
+
     // Smoothly fade out the preloader overlay
     const preloaderOverlay = document.getElementById('preloader');
     if (preloaderOverlay) {
