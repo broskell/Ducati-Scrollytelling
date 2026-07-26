@@ -8,7 +8,13 @@ import { preloader } from './preloader.js';
 import { engine } from './engine.js';
 import { scrollTimeline } from './timeline.js';
 import { mouseInteraction } from './mouse.js';
-import { editorialSections } from './content/editorial.js';
+import {
+  editorialSections,
+  evolutionData,
+  mechanicalData,
+  technicalData,
+  legendsData
+} from './content/editorial.js';
 
 class Application {
   constructor() {
@@ -16,6 +22,7 @@ class Application {
     this.targetProgress = 0;
     this.activeSceneId = null;
     this.initialized = false;
+    this.activeTab = 'home';
     
     // Developer debug properties
     this.debugMode = false;
@@ -32,10 +39,19 @@ class Application {
     // 2. Render Act II editorial articles dynamically
     this.renderActII();
 
-    // 3. Setup dev-only runtime debug triggers
+    // 3. Render secondary section grid tabs
+    this.renderEvolution();
+    this.renderMechanical();
+    this.renderTechnical();
+    this.renderLegends();
+
+    // 4. Setup tab click navigation handlers
+    this.initTabSwitcher();
+
+    // 5. Setup dev-only runtime debug triggers
     this.initDebugOverlay();
 
-    // 4. Preload frame assets and begin Act I canvas engine
+    // 6. Preload frame assets and begin Act I canvas engine
     preloader.init(
       (img1) => this.paintInitialFrame(img1),
       (pct) => this.onPreloadProgress(pct),
@@ -296,7 +312,12 @@ class Application {
   }
 
   onPreloadProgress(pct) {
-    console.log(`Chassis Assets loading: ${Math.round(pct * 100)}%`);
+    const percent = Math.round(pct * 100);
+    const progressBar = document.getElementById('loader-progress-bar');
+    const progressText = document.getElementById('loader-percentage-text');
+    
+    if (progressBar) progressBar.style.width = `${percent}%`;
+    if (progressText) progressText.textContent = `${percent}%`;
   }
 
   onAssetsLoaded() {
@@ -310,6 +331,18 @@ class Application {
     scrollTimeline.initEditorialAnimations();
 
     this.initialized = true;
+
+    // Smoothly fade out the preloader overlay
+    const preloaderOverlay = document.getElementById('preloader');
+    if (preloaderOverlay) {
+      preloaderOverlay.classList.add('fade-out');
+      // Remove from DOM after transition completes to save layers
+      setTimeout(() => {
+        preloaderOverlay.style.display = 'none';
+      }, 800);
+    }
+
+    // Start rendering frame loop
     this.tick();
   }
 
@@ -318,6 +351,9 @@ class Application {
     if (!this.initialized) return;
 
     requestAnimationFrame(() => this.tick());
+
+    // Pause heavy rendering checks when not on Home tab to save battery and GPU cycles
+    if (this.activeTab !== 'home') return;
 
     this.targetProgress = scrollTimeline.getProgress();
 
@@ -340,6 +376,205 @@ class Application {
 
     // Developer debug Overlay ticker update
     this.updateDebugOverlay(this.currentProgress, frameIndex);
+  }
+
+  // Render secondary grids dynamically from databases
+  renderEvolution() {
+    const titleEl = document.getElementById('evolution-title');
+    const subtitleEl = document.getElementById('evolution-subtitle');
+    const container = document.getElementById('evolution-grid-container');
+    if (!container) return;
+
+    titleEl.textContent = evolutionData.title;
+    subtitleEl.textContent = evolutionData.subtitle;
+    container.innerHTML = '';
+
+    evolutionData.cards.forEach(card => {
+      const cardEl = document.createElement('div');
+      cardEl.className = 'editorial-card';
+      cardEl.innerHTML = `
+        <span class="card-num-badge">${card.era}</span>
+        <div class="card-image-wrapper">
+          <img class="card-image" src="${card.image}" loading="lazy" decoding="async" alt="${card.title}">
+        </div>
+        <h3 class="card-title">${card.title}</h3>
+        <p class="card-body">${card.body}</p>
+        <div class="card-footer">
+          <span class="card-meta">SIGNATURE IDEA</span>
+          <div style="color: var(--color-text-primary); margin-top: 4px; font-weight: 500; font-size: 12px; letter-spacing: 0.5px;">${card.idea}</div>
+        </div>
+      `;
+      container.appendChild(cardEl);
+    });
+  }
+
+  renderMechanical() {
+    const titleEl = document.getElementById('mechanical-title');
+    const subtitleEl = document.getElementById('mechanical-subtitle');
+    const container = document.getElementById('mechanical-grid-container');
+    if (!container) return;
+
+    titleEl.textContent = mechanicalData.title;
+    subtitleEl.textContent = mechanicalData.subtitle;
+    container.innerHTML = '';
+
+    mechanicalData.cards.forEach(card => {
+      const cardEl = document.createElement('div');
+      cardEl.className = 'editorial-card';
+      cardEl.innerHTML = `
+        <span class="card-num-badge">${card.num}</span>
+        <div class="card-image-wrapper">
+          <img class="card-image" src="${card.image}" loading="lazy" decoding="async" alt="${card.title}">
+        </div>
+        <h3 class="card-title">${card.title}</h3>
+        <p class="card-body">${card.body}</p>
+      `;
+      container.appendChild(cardEl);
+    });
+  }
+
+  renderTechnical() {
+    const titleEl = document.getElementById('technical-title');
+    const subtitleEl = document.getElementById('technical-subtitle');
+    const container = document.getElementById('technical-grid-container');
+    if (!container) return;
+
+    titleEl.textContent = technicalData.title;
+    subtitleEl.textContent = technicalData.subtitle;
+    container.innerHTML = '';
+
+    technicalData.cards.forEach(card => {
+      const cardEl = document.createElement('div');
+      cardEl.className = 'editorial-card';
+      cardEl.innerHTML = `
+        <div class="card-icon-badge">${card.icon}</div>
+        <h3 class="card-title" style="margin-top: 8px;">${card.title}</h3>
+        <p class="card-body">${card.desc}</p>
+      `;
+      container.appendChild(cardEl);
+    });
+  }
+
+  renderLegends() {
+    const titleEl = document.getElementById('legends-title');
+    const subtitleEl = document.getElementById('legends-subtitle');
+    const container = document.getElementById('legends-grid-container');
+    if (!container) return;
+
+    titleEl.textContent = legendsData.title;
+    subtitleEl.textContent = legendsData.subtitle;
+    container.innerHTML = '';
+
+    legendsData.cards.forEach(card => {
+      const cardEl = document.createElement('div');
+      cardEl.className = 'editorial-card';
+      cardEl.innerHTML = `
+        <div class="card-image-wrapper" style="aspect-ratio: 1/1;">
+          <img class="card-image" src="${card.image}" loading="lazy" decoding="async" alt="${card.name}">
+        </div>
+        <span class="card-meta" style="margin-top: 8px;">${card.role}</span>
+        <h3 class="card-title" style="font-size: 1.8rem; margin-top: 4px;">${card.name}</h3>
+        <p class="card-body">${card.body}</p>
+        <div class="card-footer" style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
+          <span class="card-meta" style="color: var(--color-accent-red);">ACHIEVEMENTS</span>
+          <div style="color: var(--color-text-primary); margin-top: 4px; font-weight: 500; font-size: 12px; letter-spacing: 0.5px;">${card.achievements}</div>
+        </div>
+      `;
+      container.appendChild(cardEl);
+    });
+  }
+
+  // Initialize navigation link click listeners (Awwwards-inspired fades)
+  initTabSwitcher() {
+    const links = document.querySelectorAll('.nav-link');
+    const actionBtn = document.getElementById('action-btn-index');
+
+    const updateActionButton = (tabId) => {
+      if (!actionBtn) return;
+      switch (tabId) {
+        case 'home':
+          actionBtn.textContent = 'MECHANICAL INDEX';
+          break;
+        case 'evolution':
+          actionBtn.textContent = 'EVOLUTION ARCHIVE';
+          break;
+        case 'mechanical':
+          actionBtn.textContent = 'TECHNICAL SYSTEMS';
+          break;
+        case 'technical':
+          actionBtn.textContent = 'INERTIAL DATA';
+          break;
+        case 'legends':
+          actionBtn.textContent = 'LEGENDS ARCHIVE';
+          break;
+      }
+    };
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetTab = link.getAttribute('data-tab');
+        if (targetTab === this.activeTab) return;
+
+        // 1. Highlight active navigation tab link
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        // 2. Animate Action Button content
+        updateActionButton(targetTab);
+
+        // 3. Fade out the old active section pane
+        const currentPane = document.getElementById(`tab-section-${this.activeTab}`);
+        const nextPane = document.getElementById(`tab-section-${targetTab}`);
+
+        if (currentPane && nextPane) {
+          // Fade-out current pane
+          currentPane.classList.remove('visible');
+          
+          setTimeout(() => {
+            // Hide current, show next pane
+            currentPane.classList.remove('active');
+            nextPane.classList.add('active');
+
+            // Scroll directly to top
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            // Set activeTab state to switch tick pausing
+            this.activeTab = targetTab;
+
+            // Trigger fresh layout sizes on canvas resize if going back to home
+            if (targetTab === 'home') {
+              engine.resize();
+              // Trigger ScrollTrigger layout refreshes so pinning works smoothly
+              if (window.ScrollTrigger) {
+                window.ScrollTrigger.refresh();
+              }
+            }
+
+            // Small tick delay to trigger CSS fade-in
+            setTimeout(() => {
+              nextPane.classList.add('visible');
+            }, 50);
+
+          }, 400); // matches fade out time
+        }
+      });
+    });
+
+    // Setup action button quick-switching clicks
+    if (actionBtn) {
+      actionBtn.addEventListener('click', () => {
+        let targetNavTab = 'home';
+        if (this.activeTab === 'home') targetNavTab = 'mechanical';
+        else if (this.activeTab === 'mechanical') targetNavTab = 'technical';
+        else if (this.activeTab === 'technical') targetNavTab = 'legends';
+        else if (this.activeTab === 'legends') targetNavTab = 'evolution';
+        else targetNavTab = 'home';
+
+        const linkEl = document.querySelector(`.nav-link[data-tab="${targetNavTab}"]`);
+        if (linkEl) linkEl.click();
+      });
+    }
   }
 
   updateScenes(progress) {

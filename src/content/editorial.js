@@ -1,4 +1,6 @@
-// Editorial Content Database: Copywriting for Act II Magazine Sections
+// Editorial Content Database: Copywriting for Act II Magazine Sections & Interactive Tabs
+
+// 1. Home Page Act II Magazine Sections (Original)
 export const editorialSections = [
   {
     id: 'editorial-intro',
@@ -135,3 +137,154 @@ export const editorialSections = [
     body: '“Performance is not assembled in a factory. It is engineered through thousands of decisions.”'
   }
 ];
+
+// 2. Evolution Section Database
+export const evolutionData = {
+  title: 'Seven decades of pressure, speed, and rules.',
+  subtitle: 'A focused archive of the major design eras that turned simple racing machines into carbon, hybrid, ground-effect laboratories.',
+  cards: [
+    {
+      era: '1950s',
+      title: 'Desmodromic Beginnings',
+      body: 'Fabio Taglioni introduces desmodromic valve actuation, eliminating valve float springs to reach rev levels previously deemed mechanically impossible.',
+      image: 'assets/evolution_1950s.png',
+      idea: 'Mechanical synchronization over valve springs'
+    },
+    {
+      era: '1970s',
+      title: 'The V-Twin Revolution',
+      body: 'Ducati establishes its signature 90° L-Twin engine geometry at Imola, balancing primary engine harmonics with absolute chassis narrowness.',
+      image: 'assets/evolution_1970s.png',
+      idea: 'Aerodynamic narrow profile and torque delivery'
+    },
+    {
+      era: '1990s',
+      title: 'The Iconic 916 Era',
+      body: 'Massimo Tamburini crafts a design icon. An under-seat exhaust configuration and single-sided swingarm revolutionize superbike packaging and styling.',
+      image: 'assets/evolution_1990s.png',
+      idea: 'Symmetrical airflow extraction and visual balance'
+    },
+    {
+      era: '2000s',
+      title: 'MotoGP Desmosedici Entry',
+      body: 'Ducati debuts in MotoGP with the V4 Desmosedici GP7. Casey Stoner tames the aggressive power band to claim a historic world championship title.',
+      image: 'assets/evolution_2000s.png',
+      idea: 'Raw desmosedici output and modular chassis flex'
+    },
+    {
+      era: 'Present',
+      title: 'Panigale V4 Stradale',
+      body: 'A direct bridge between track limits and street legality. Counter-rotating crankshaft engineering offsets tire gyroscopic dynamics to corner effortlessly.',
+      image: 'assets/evolution_present.png',
+      idea: 'GP-derived architecture on production lines'
+    }
+  ]
+};
+
+// 3. Mechanical Components Database
+export const mechanicalData = {
+  title: 'Every major assembly, explained cleanly.',
+  subtitle: 'A professional component view for the systems that define a superbike: structure, suspension, braking, cooling, exhaust, and aerodynamics.',
+  cards: [
+    {
+      num: '01',
+      title: 'Front Frame Monocoque',
+      body: 'The ultra-compact aluminum Front Frame uses the engine block as a structural stressed member, yielding extreme torsional stiffness while saving chassis weight.',
+      image: 'assets/mechanical_frame.png'
+    },
+    {
+      num: '02',
+      title: 'Biplane Winglets',
+      body: 'Dual-profile carbon fiber winglets create 37 kg of downforce at 300 km/h. This vertical pressure anchors the front contact patch, suppressing wheelie lift.',
+      image: 'assets/ducati_fairing.png'
+    },
+    {
+      num: '03',
+      title: 'Ohlins Damping forks',
+      body: 'Semi-active Ohlins NPX pressurized forks adjust compression and rebound in real-time, preventing front-end dive during heavy deceleration entries.',
+      image: 'assets/ducati_suspension.png'
+    },
+    {
+      num: '04',
+      title: 'Brembo Calipers',
+      body: 'Dual monoblock Brembo Stylema calipers bite into 330 mm rotors, combining optimized fluid ventilation with maximum thermal deceleration stability.',
+      image: 'assets/mechanical_brakes.png'
+    },
+    {
+      num: '05',
+      title: 'Desmosedici Engine',
+      body: 'A 1,103 cc 90-degree desmodromic V4 utilizing a MotoGP counter-rotating crankshaft configuration to suppress wheelie lift and corner inertia.',
+      image: 'assets/ducati_engine.png'
+    },
+    {
+      num: '06',
+      title: 'Titanium Exhaust',
+      body: 'A lightweight under-engine exhaust layout containing long-runner pipes that optimize pressure waves while keeping center-of-gravity centralized.',
+      image: 'assets/mechanical_exhaust.png'
+    }
+  ]
+};
+
+// 4. Technical Electronic Systems Database
+export const technicalData = {
+  title: 'Inertial Cognitive Assist.',
+  subtitle: 'An advanced 6-axis Bosch IMU measures chassis roll, pitch, and yaw in milliseconds to govern riding assistance programs dynamically.',
+  cards: [
+    {
+      icon: 'ABS',
+      title: 'Cornering ABS EVO',
+      desc: 'Controls brake line pressure dynamically based on motorcycle lean angle to prevent front-end slide-outs during mid-corner deceleration.'
+    },
+    {
+      icon: 'DTC',
+      title: 'Traction Control EVO 3',
+      desc: 'Utilizes predictive slip algorithms to modulate engine torque via ignition retard and fuel injection, ensuring rear tire slide predictability.'
+    },
+    {
+      icon: 'DQS',
+      title: 'Quick Shift Up/Down',
+      desc: 'Interprets gear linkage load cells to cut ignition briefly, allowing lightning-fast clutchless shifts under full acceleration throttle.'
+    },
+    {
+      icon: 'DWC',
+      title: 'Wheelie Control',
+      desc: 'Detects front wheel lift height via suspension stroke sensors and pitch rate, reducing engine load to maximize forward forward drive.'
+    }
+  ]
+};
+
+// 5. Legends Section Database
+export const legendsData = {
+  title: 'them.',
+  subtitle: 'Four racing legends chosen for world championships, absolute desmo racecraft, and era-defining dominance.',
+  cards: [
+    {
+      name: 'Carl Fogarty',
+      role: 'The King of WSBK',
+      body: 'Foggy established the Ducati dominance of the 1990s. His aggressive head-down cornering style and four World Superbike championships cemented the Ducati red as a global racing icon.',
+      image: 'assets/legend_fogarty.png',
+      achievements: '4x WSBK Champion, 55 World Superbike Wins'
+    },
+    {
+      name: 'Troy Bayliss',
+      role: 'The Maverick of Imola',
+      body: 'Bayliss captured three WSBK titles across three generations of Ducati superbikes (996, 999, 1098). His legendary slide control and drift-happy riding style defined desmo limits.',
+      image: 'assets/legend_bayliss.jpg',
+      achievements: '3x WSBK Champion, 52 Wins, 1 MotoGP Victory'
+    },
+    {
+      name: 'Casey Stoner',
+      role: 'MotoGP Desmo Tamer',
+      body: 'Stoner was the only rider capable of riding the wild V4 Desmosedici GP7 on the ragged edge. His slide-throttle style secured Ducati’s first historic MotoGP World Championship in 2007.',
+      image: 'assets/legend_stoner.png',
+      achievements: '2x MotoGP Champion (2007, 2011), 38 MotoGP Wins'
+    },
+    {
+      name: 'Francesco Bagnaia',
+      role: 'The Modern Champion',
+      body: 'Pecco Bagnaia combines desmodromic power with precision corner entry dynamics, securing back-to-back MotoGP world titles to establish a new golden era of Ducati Corse dominance.',
+      image: 'assets/legend_bagnaia.jpg',
+      achievements: '2x MotoGP Champion (2022, 2023), 28+ Grand Prix Wins'
+    }
+  ]
+};
