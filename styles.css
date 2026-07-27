@@ -1238,3 +1238,515 @@ canvas {
 .streamline.line-4 {
   animation-duration: 3s;
 }
+
+/* ==========================================================================
+   Act II Redesigned Sections: Cognitive Assist & Racing Chronology
+   ========================================================================== */
+
+/* 1. Cognitive Assist (electronics-grid) Asymmetric Editorial Grid */
+.electronics-split-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-xl);
+  align-items: center;
+  width: 100%;
+}
+
+.electronics-info-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Telemetry HUD Cards Grid */
+.telemetry-hud-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  width: 100%;
+}
+
+.telemetry-hud-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+  background: rgba(15, 15, 15, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.4s ease, transform 0.4s ease;
+}
+
+.telemetry-hud-card:hover {
+  border-color: rgba(212, 0, 31, 0.35);
+  transform: translateY(-2px);
+}
+
+.hud-circle {
+  width: 52px;
+  height: 52px;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+}
+
+.hud-circle-bg {
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 6;
+  fill: none;
+}
+
+.hud-circle-fill {
+  stroke: var(--color-accent-red);
+  stroke-width: 6;
+  stroke-linecap: round;
+  fill: none;
+  transition: stroke-dashoffset 0.15s ease-out;
+}
+
+.hud-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hud-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
+
+.hud-value {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 750;
+  color: var(--color-text-primary);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Technology chips grid */
+.cognitive-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  width: 100%;
+}
+
+.cognitive-chip {
+  display: flex;
+  gap: var(--space-xs);
+  padding: var(--space-xs);
+  background: rgba(10, 10, 10, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.cognitive-chip:hover {
+  border-color: rgba(212, 0, 31, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.chip-icon {
+  background: rgba(212, 0, 31, 0.08);
+  border: 1px solid rgba(212, 0, 31, 0.2);
+  color: var(--color-accent-red);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chip-title {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.chip-desc {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+/* Right Side Gyroscope visual display */
+.electronics-visual-side {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.gyro-visual-container {
+  position: relative;
+  width: 95%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.gyro-ring {
+  position: absolute;
+  border: 1.5px dashed rgba(212, 0, 31, 0.2);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(212, 0, 31, 0.04);
+}
+
+.ring-outer {
+  width: 90%;
+  height: 90%;
+}
+
+.ring-middle {
+  width: 72%;
+  height: 72%;
+  border-color: rgba(255, 255, 255, 0.08);
+  border-style: solid;
+}
+
+.ring-inner {
+  width: 55%;
+  height: 55%;
+}
+
+.cognitive-assist-hero-img {
+  position: relative;
+  width: 65%;
+  height: 65%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  transition: transform 0.1s ease-out;
+}
+
+.hud-telemetry-panel {
+  position: absolute;
+  bottom: 8%;
+  right: 5%;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(5, 5, 5, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+.hud-telemetry-header {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--color-accent-red);
+  font-weight: 800;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.hud-telemetry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.hud-telemetry-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 2. Racing DNA Chronology Cinematic Timeline Layout */
+.timeline-museum-layout {
+  display: grid;
+  grid-template-columns: 1fr 60px 1.55fr;
+  gap: var(--space-md);
+  width: 100%;
+  position: relative;
+  padding-top: var(--space-xl);
+}
+
+.timeline-sticky-left {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  height: auto;
+  padding-right: var(--space-md);
+}
+
+.timeline-huge-title {
+  font-size: clamp(3.8rem, 6.5vw, 5.5rem) !important;
+  line-height: 0.88 !important;
+  letter-spacing: -0.04em !important;
+  color: var(--color-text-primary) !important;
+  margin-bottom: var(--space-sm) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+}
+
+.timeline-quote {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  color: var(--color-accent-red);
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  margin-bottom: var(--space-xs);
+  line-height: 1.3;
+}
+
+.timeline-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  font-weight: 300;
+}
+
+/* Center timeline line progress visual tracking */
+.timeline-center-line-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-progress-line {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--color-accent-red) 0%, rgba(212, 0, 31, 0.06) 100%);
+  height: 0%;
+  box-shadow: 0 0 10px var(--color-accent-red);
+}
+
+.timeline-nodes-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--space-xl);
+}
+
+.timeline-progress-node {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.timeline-progress-node.active {
+  border-color: var(--color-accent-red);
+  background-color: var(--color-accent-red);
+  box-shadow: 0 0 12px var(--color-accent-red);
+}
+
+.node-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent-red);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.timeline-progress-node.active .node-pulse {
+  opacity: 0.5;
+  transform: scale(1.4);
+  animation: pulseNode 2s infinite ease-out;
+}
+
+.node-year-label {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition: color 0.4s ease;
+}
+
+.timeline-progress-node.active .node-year-label {
+  color: var(--color-text-primary);
+}
+
+@keyframes pulseNode {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Staggered Milestone viewports inside Timeline */
+.timeline-milestones-column {
+  display: flex;
+  flex-direction: column;
+  gap: 160px;
+  padding-bottom: 120px;
+}
+
+.milestone-chapter {
+  opacity: 0.35;
+  transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.milestone-chapter.active {
+  opacity: 1.0;
+}
+
+.milestone-card {
+  background: rgba(10, 10, 10, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: var(--space-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.8s ease, box-shadow 0.8s ease;
+}
+
+.milestone-chapter.active .milestone-card {
+  border-color: rgba(212, 0, 31, 0.4);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8),
+              inset 0 0 20px rgba(212, 0, 31, 0.05);
+}
+
+.milestone-year-huge {
+  font-size: clamp(3.2rem, 5.5vw, 5rem) !important;
+  color: var(--color-accent-red);
+  line-height: 1.0;
+  margin-bottom: 6px;
+  display: block;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+.milestone-title {
+  font-size: clamp(1.4rem, 2.2vw, 2.1rem) !important;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-xs);
+  line-height: 1.25;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+.milestone-body {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+  font-weight: 300;
+}
+
+.milestone-image-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: var(--space-sm);
+}
+
+.milestone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  filter: blur(6px);
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1),
+              opacity 1.2s ease,
+              filter 1.2s ease;
+}
+
+.milestone-chapter.active .milestone-img {
+  opacity: 0.95;
+  filter: blur(0px);
+  transform: scale(1.03);
+}
+
+.milestone-image-shroud {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+}
+
+.milestone-spec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+}
+
+.spec-chip {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--color-text-secondary);
+}
+
+/* Responsive splits */
+@media (max-width: 1024px) {
+  .electronics-split-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .timeline-museum-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .timeline-sticky-left {
+    position: relative;
+    top: 0;
+    padding-right: 0;
+    margin-bottom: var(--space-md);
+  }
+  .timeline-center-line-wrapper {
+    display: none;
+  }
+}
+

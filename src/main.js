@@ -7,8 +7,11 @@ import { TYPOGRAPHY } from './config/typography.js';
 import { preloader } from './preloader.js';
 import { engine } from './engine.js';
 import { scrollTimeline } from './timeline.js';
+import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { mouseInteraction } from './mouse.js';
+
+gsap.registerPlugin(ScrollTrigger);
 import {
   editorialSections,
   evolutionData,
@@ -233,36 +236,161 @@ class Application {
         `;
       } else if (section.type === 'electronics-grid') {
         contentHTML = `
-          <div class="editorial-container fade-up">
-            <h2 class="editorial-title">${section.title}</h2>
-            <h3 class="scene-accent">${section.subtitle}</h3>
-            <p class="scene-narrative-short">${section.body}</p>
-            <div class="electronics-cards-grid">
-               ${section.cards.map(card => `
-                 <div class="tech-card">
-                   <div class="tech-card-icon">${card.icon}</div>
-                   <h4 class="tech-card-title">${card.title}</h4>
-                   <p class="tech-card-text">${card.text}</p>
-                 </div>
-               `).join('')}
+          <div class="editorial-container electronics-split-layout fade-up">
+            <div class="electronics-info-side">
+              <span class="scene-accent">03 / INERTIAL COGNITIVE SYSTEMS</span>
+              <h2 class="editorial-title">${section.title}</h2>
+              <h3 class="premium-sub">${section.subtitle}</h3>
+              <p class="scene-narrative">${section.body}</p>
+              
+              <!-- Live Telemetry HUD Dials -->
+              <div class="telemetry-hud-container">
+                <div class="telemetry-hud-card glass-panel" data-telemetry="yaw">
+                  <svg class="hud-circle" viewBox="0 0 100 100">
+                    <circle class="hud-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="hud-circle-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251.2; stroke-dashoffset: 210;"></circle>
+                  </svg>
+                  <div class="hud-data">
+                    <span class="hud-label">YAW</span>
+                    <span class="hud-value" id="hud-yaw-val">0.0°</span>
+                  </div>
+                </div>
+                <div class="telemetry-hud-card glass-panel" data-telemetry="roll">
+                  <svg class="hud-circle" viewBox="0 0 100 100">
+                    <circle class="hud-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="hud-circle-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251.2; stroke-dashoffset: 120;"></circle>
+                  </svg>
+                  <div class="hud-data">
+                    <span class="hud-label">ROLL</span>
+                    <span class="hud-value" id="hud-roll-val">0.0°</span>
+                  </div>
+                </div>
+                <div class="telemetry-hud-card glass-panel" data-telemetry="pitch">
+                  <svg class="hud-circle" viewBox="0 0 100 100">
+                    <circle class="hud-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="hud-circle-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251.2; stroke-dashoffset: 240;"></circle>
+                  </svg>
+                  <div class="hud-data">
+                    <span class="hud-label">PITCH</span>
+                    <span class="hud-value" id="hud-pitch-val">0.0°</span>
+                  </div>
+                </div>
+                <div class="telemetry-hud-card glass-panel" data-telemetry="brake">
+                  <svg class="hud-circle" viewBox="0 0 100 100">
+                    <circle class="hud-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="hud-circle-fill" cx="50" cy="50" r="40" style="stroke-dasharray: 251.2; stroke-dashoffset: 180;"></circle>
+                  </svg>
+                  <div class="hud-data">
+                    <span class="hud-label">BRAKE</span>
+                    <span class="hud-value" id="hud-brake-val">0 bar</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Cognitive Assist Cards Grid -->
+              <div class="cognitive-chips-grid">
+                ${section.cards.map((card, i) => `
+                  <div class="cognitive-chip glass-panel fade-in-chip" style="transition-delay: ${i * 0.1}s;">
+                    <span class="chip-icon">${card.icon}</span>
+                    <div class="chip-content">
+                      <h4 class="chip-title">${card.title}</h4>
+                      <p class="chip-desc">${card.text}</p>
+                    </div>
+                  </div>
+                `).join('')}
+                <div class="cognitive-chip glass-panel fade-in-chip" style="transition-delay: 0.4s;">
+                  <span class="chip-icon">EBC</span>
+                  <div class="chip-content">
+                    <h4 class="chip-title">Engine Brake Control</h4>
+                    <p class="chip-desc">Optimizes rear wheel stability under extreme decel torque.</p>
+                  </div>
+                </div>
+                <div class="cognitive-chip glass-panel fade-in-chip" style="transition-delay: 0.5s;">
+                  <span class="chip-icon">DSC</span>
+                  <div class="chip-content">
+                    <h4 class="chip-title">Ducati Slide Control</h4>
+                    <p class="chip-desc">Governs drift angles smoothly during slide-out sweeps.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Side Visual Showcase -->
+            <div class="electronics-visual-side">
+              <div class="telemetry-particles-bg"></div>
+              <div class="gyro-visual-container">
+                <div class="gyro-ring ring-outer"></div>
+                <div class="gyro-ring ring-middle"></div>
+                <div class="gyro-ring ring-inner"></div>
+                <img class="cognitive-assist-hero-img" src="assets/cognitive-assist.webp" alt="Cognitive Assist Telemetry Visualization">
+              </div>
+              <div class="hud-telemetry-panel glass-panel">
+                <div class="hud-telemetry-header">BOSCH 6-AXIS IMU ACTIVE</div>
+                <div class="hud-telemetry-body">
+                  <div class="hud-telemetry-item">LEAN ANGLE: <span class="text-glow" id="imu-lean-val">0.0°</span></div>
+                  <div class="hud-telemetry-item">LATERAL G-FORCE: <span class="text-glow" id="imu-g-val">0.0 G</span></div>
+                  <div class="hud-telemetry-item">TRACTION SLIP: <span class="text-glow" id="imu-slip-val">0%</span></div>
+                </div>
+              </div>
             </div>
           </div>
         `;
       } else if (section.type === 'heritage-timeline') {
         contentHTML = `
-          <div class="editorial-container fade-up">
-            <h2 class="editorial-title">${section.title}</h2>
-            <h3 class="scene-accent">${section.subtitle}</h3>
-            <div class="timeline-visual-container">
-              <div class="timeline-slider-line"></div>
-              <div class="timeline-years-grid">
-                ${section.timeline.map(node => `
-                  <div class="timeline-node active">
-                    <span class="timeline-year">${node.year}</span>
-                    <span class="timeline-event">${node.event}</span>
+          <div class="timeline-museum-layout">
+            <!-- Left Side: Sticky Chapter Title -->
+            <div class="timeline-sticky-left">
+              <div class="sticky-inner">
+                <span class="scene-accent">04 / CORSE HERITAGE</span>
+                <h2 class="timeline-huge-title font-serif">Racing<br>DNA<br>Chronology</h2>
+                <p class="timeline-quote font-serif">“Every championship reshaped the machine.”</p>
+                <p class="timeline-desc">Ducati's competitive history is a seventy-year chronicle of mechanical breakthroughs. Track limits are forced into production lines, proving desmodromic actuation on the world's most demanding circuits.</p>
+              </div>
+            </div>
+            
+            <!-- Center Column: Glowing Vertical Timeline Line -->
+            <div class="timeline-center-line-wrapper">
+              <div class="timeline-progress-line" id="timeline-progress-line"></div>
+              <div class="timeline-nodes-container">
+                ${section.timeline.map((node, i) => `
+                  <div class="timeline-progress-node" id="timeline-node-${i}" data-index="${i}">
+                    <div class="node-pulse"></div>
+                    <span class="node-year-label">${node.year}</span>
                   </div>
                 `).join('')}
               </div>
+            </div>
+            
+            <!-- Right Column: Staggered Milestone Viewports -->
+            <div class="timeline-milestones-column">
+              ${section.timeline.map((node, i) => {
+                let imgPath = 'assets/timeline-present.webp';
+                if (node.year === '1926') imgPath = 'assets/timeline-1926.webp';
+                else if (node.year === '1972') imgPath = 'assets/timeline-1972.webp';
+                else if (node.year === '1994') imgPath = 'assets/timeline-1994.webp';
+                else if (node.year === '2007') imgPath = 'assets/timeline-2007.webp';
+                
+                return `
+                  <div class="milestone-chapter" id="milestone-chapter-${i}" data-index="${i}">
+                    <div class="milestone-card glass-panel">
+                      <span class="milestone-year-huge font-serif">${node.year}</span>
+                      <h3 class="milestone-title font-serif">${node.event}</h3>
+                      <p class="milestone-body">${node.body}</p>
+                      
+                      <div class="milestone-image-wrapper">
+                        <img class="milestone-img" src="${imgPath}" alt="${node.event}" loading="lazy" decoding="async">
+                        <div class="milestone-image-shroud"></div>
+                      </div>
+                      
+                      <div class="milestone-spec-chips">
+                        <span class="spec-chip">CHASSIS REFINE</span>
+                        <span class="spec-chip">DESMO ACTUATED</span>
+                        <span class="spec-chip">CORSE SPEED</span>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
         `;
@@ -343,6 +471,8 @@ class Application {
 
     // Register Act II dynamic scroll trigger animations
     scrollTimeline.initEditorialAnimations();
+
+    this.initEditorialInteractiveTimelines();
 
     this.initialized = true;
 
@@ -758,6 +888,149 @@ class Application {
       <div>Loaded Frames: ${preloader.loadedCount} / 51</div>
       <div>Viewport: ${window.innerWidth}x${window.innerHeight}</div>
     `;
+  }
+
+  initEditorialInteractiveTimelines() {
+    // Check if gsap is available
+    if (typeof gsap === 'undefined') return;
+
+    // 1. Cognitive Assist (electronics-grid) GSAP interactive dashboard triggers
+    const telemetryObj = { yaw: 0, roll: 0, pitch: 0, brake: 0, lean: 0, gforce: 0, slip: 0 };
+    const electronicsTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.electronics-section',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        scrub: true
+      }
+    });
+
+    electronicsTL.to(telemetryObj, {
+      yaw: 12.5,
+      roll: 58.4,
+      pitch: 2.1,
+      brake: 11.8,
+      lean: 58.4,
+      gforce: 1.45,
+      slip: 4,
+      onUpdate: () => {
+        const yawEl = document.getElementById('hud-yaw-val');
+        const rollEl = document.getElementById('hud-roll-val');
+        const pitchEl = document.getElementById('hud-pitch-val');
+        const brakeEl = document.getElementById('hud-brake-val');
+        const leanEl = document.getElementById('imu-lean-val');
+        const gforceEl = document.getElementById('imu-g-val');
+        const slipEl = document.getElementById('imu-slip-val');
+
+        if (yawEl) yawEl.textContent = `${telemetryObj.yaw.toFixed(1)}°`;
+        if (rollEl) rollEl.textContent = `${telemetryObj.roll.toFixed(1)}°`;
+        if (pitchEl) pitchEl.textContent = `${telemetryObj.pitch.toFixed(1)}°`;
+        if (brakeEl) brakeEl.textContent = `${Math.round(telemetryObj.brake)} bar`;
+        if (leanEl) leanEl.textContent = `${telemetryObj.lean.toFixed(1)}°`;
+        if (gforceEl) gforceEl.textContent = `${telemetryObj.gforce.toFixed(2)} G`;
+        if (slipEl) slipEl.textContent = `${Math.round(telemetryObj.slip)}%`;
+
+        // Update SVG circle stroke dashoffsets dynamically to match percentages/dials
+        const circles = document.querySelectorAll('.hud-circle-fill');
+        circles.forEach((circle) => {
+          const parentCard = circle.closest('.telemetry-hud-card');
+          if (!parentCard) return;
+          const type = parentCard.getAttribute('data-telemetry');
+          let val = 0;
+          let maxVal = 100;
+          if (type === 'yaw') { val = telemetryObj.yaw; maxVal = 20; }
+          else if (type === 'roll') { val = telemetryObj.roll; maxVal = 65; }
+          else if (type === 'pitch') { val = telemetryObj.pitch; maxVal = 5; }
+          else if (type === 'brake') { val = telemetryObj.brake; maxVal = 15; }
+
+          const strokeDasharray = 251.2; // 2 * pi * 40
+          const progress = Math.min(Math.max(val / maxVal, 0), 1);
+          circle.style.strokeDashoffset = strokeDasharray - (progress * strokeDasharray);
+        });
+      }
+    }, 0);
+
+    // Parallax lean visual
+    electronicsTL.to('.cognitive-assist-hero-img', {
+      rotation: -12,
+      scale: 1.06,
+      yPercent: 8,
+      ease: 'none'
+    }, 0);
+
+    // Rotate telemetry gyroscope rings
+    electronicsTL.to('.ring-outer', { rotation: 120, ease: 'none' }, 0);
+    electronicsTL.to('.ring-middle', { rotation: -180, ease: 'none' }, 0);
+    electronicsTL.to('.ring-inner', { rotation: 95, ease: 'none' }, 0);
+
+    // Staggered reveals for cards and chips
+    electronicsTL.fromTo('.telemetry-hud-card', {
+      opacity: 0,
+      y: 30,
+      scale: 0.96
+    }, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      stagger: 0.08,
+      duration: 0.6
+    }, 0);
+
+    electronicsTL.fromTo('.fade-in-chip', {
+      opacity: 0,
+      y: 20,
+      scale: 0.97
+    }, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      stagger: 0.06,
+      duration: 0.6
+    }, 0.2);
+
+    // 2. Racing DNA Chronology vertical timeline animation
+    gsap.fromTo('#timeline-progress-line', {
+      height: '0%'
+    }, {
+      height: '100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.timeline-museum-layout',
+        start: 'top 50%',
+        end: 'bottom 50%',
+        scrub: true
+      }
+    });
+
+    const milestones = document.querySelectorAll('.milestone-chapter');
+    milestones.forEach((stone) => {
+      const idx = stone.getAttribute('data-index');
+      ScrollTrigger.create({
+        trigger: stone,
+        start: 'top 65%',
+        end: 'bottom 65%',
+        onEnter: () => {
+          const node = document.getElementById(`timeline-node-${idx}`);
+          if (node) node.classList.add('active');
+          stone.classList.add('active');
+        },
+        onEnterBack: () => {
+          const node = document.getElementById(`timeline-node-${idx}`);
+          if (node) node.classList.add('active');
+          stone.classList.add('active');
+        },
+        onLeave: () => {
+          const node = document.getElementById(`timeline-node-${idx}`);
+          if (node) node.classList.remove('active');
+          stone.classList.remove('active');
+        },
+        onLeaveBack: () => {
+          const node = document.getElementById(`timeline-node-${idx}`);
+          if (node) node.classList.remove('active');
+          stone.classList.remove('active');
+        }
+      });
+    });
   }
 }
 

@@ -106,11 +106,31 @@ export const editorialSections = [
     title: 'Racing DNA Chronology',
     subtitle: 'MotoGP Derived Evolution',
     timeline: [
-      { year: '1926', event: 'Company founded as radio manufacturer' },
-      { year: '1972', event: 'First desmodromic twin superbike success' },
-      { year: '1994', event: 'Iconic 916 launch, changing superbike architecture' },
-      { year: '2007', event: 'MotoGP World Championship triumph' },
-      { year: 'Present', event: 'Panigale V4: peak of track-derived racing lineage' }
+      { 
+        year: '1926', 
+        event: 'Bologna Foundation', 
+        body: 'Founded as Società Scientifica Radio Brevetti Ducati. The company began by producing radio components and capacitors, establishing a heritage of high-precision micro-mechanics before ever building motor engines.' 
+      },
+      { 
+        year: '1972', 
+        event: 'The Imola Breakthrough', 
+        body: 'Paul Smart rides a modified desmodromic 750 Twin to victory at the Imola 200. This legendary success cements desmodromic valve actuation as the structural pillar of Ducati engineering.' 
+      },
+      { 
+        year: '1994', 
+        event: 'The 916 Masterpiece', 
+        body: 'Massimo Tamburini unveils the Ducati 916. Its under-seat exhaust, single-sided swingarm, and sharp dual headlights revolutionize superbike design, packaging, and aerodynamics.' 
+      },
+      { 
+        year: '2007', 
+        event: 'MotoGP World Domain', 
+        body: 'Casey Stoner tames the aggressive power band of the 800cc V4 Desmosedici GP7, capturing Ducati\'s first GP World Championship in the four-stroke era with raw traction slide control.' 
+      },
+      { 
+        year: 'Present', 
+        event: 'The Panigale V4 Era', 
+        body: 'Direct transfer of MotoGP counter-rotating crankshaft dynamics and biplane wings into production lines. An absolute expression of street-legal speed engineered through Corse telemetry.' 
+      }
     ]
   },
   {
